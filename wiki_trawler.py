@@ -19,6 +19,8 @@ csv_writer = csv.writer(csv_file)
 # Find all hyperlinks in the HTML source
 list_divs = soup.find_all('div', class_='div-col')
 
+count = 0
+
 for div in list_divs:
     for link in div.find_all('a'):
         href = link.get('href')
@@ -26,8 +28,7 @@ for div in list_divs:
             # Extract the article title
             title = link.text.strip()
 
-            # Encode and decode the title to handle encoding issues
-            title = title.encode('utf-8').decode('utf-8')
+            count += 1
 
             # Get the URL of the article
             article_url = f"https://en.wikipedia.org{href}"
@@ -37,6 +38,8 @@ for div in list_divs:
             
             # Write the extracted information to the CSV file
             csv_writer.writerow([title, article_url])
+            
+print(count)
 
 # Close the CSV file
 csv_file.close()
