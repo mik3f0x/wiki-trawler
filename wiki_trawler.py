@@ -35,10 +35,17 @@ for div in list_divs:
             article_url = f"https://en.wikipedia.org{href}"
 
             # Process the article URL and extract relevant information
-            # ... (your code here)
+            # this doesn't seem to actually work; it just returns the same url, not the redirect
+            line_response = requests.get(article_url)
+            true_url = line_response.url
+
+            if true_url != article_url:
+                print(f"found redirect for {title}: {article_url} -> {true_url}")
             
             # Write the extracted information to the CSV file
-            csv_writer.writerow([title, article_url])
+            csv_writer.writerow([title, true_url])
+
+            print(f"Writing line {count}")
             
 print(count)
 
