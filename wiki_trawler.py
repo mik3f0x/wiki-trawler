@@ -2,6 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+import pandas as pd
 
 # URL of the Wikipedia page
 url = 'https://en.wikipedia.org/wiki/List_of_hip_hop_musicians'
@@ -43,3 +44,25 @@ print(count)
 
 # Close the CSV file
 csv_file.close()
+
+
+# 1. Read CSV
+df = pd.read_csv("wiki_rappers.csv")
+
+print(df.duplicated().sum())
+
+# 2(a). For complete row duplicate
+df.drop_duplicates(inplace=True)
+             
+# 2(b). For partials
+# pd.drop_duplicates(subset=['Date', 'Time', <other_fields>], inplace=True)
+
+print(df.duplicated().sum())
+
+# 3. Save then
+df.to_csv("wiki_rappers.csv", index=False)
+
+deduped_file = open('wiki_rappers.csv', 'r', encoding='utf-8')
+row_count = sum(1 for row in deduped_file)
+print(row_count)
+deduped_file.close()
