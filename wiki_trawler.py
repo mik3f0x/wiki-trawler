@@ -54,8 +54,8 @@ for div in list_divs:
             # Get the URL of the article
             link_url = f"https://en.wikipedia.org{href}"
 
-            if count % 250 == 0 or count > 4000:
-                print(f"Writing line {count}") # - {title}: {link_url}")
+            # if count % 1000 == 0 or count > 4000:
+            #     print(f"Writing line {count}") # - {title}: {link_url}")
 
             snake_title = href[href.rindex("/")+1:]
             if "#" in href:
@@ -67,8 +67,8 @@ for div in list_divs:
             true_title = redirect["title"]
             true_url = redirect["final_url"]
 
-            if true_url != link_url:
-                print(f"found redirect on line {count} for {title} -> {true_title}\n\t{link_url}\n\t-> {true_url}")
+            # if true_url != link_url:
+            #     print(f"Found redirect on line {count} for {title} -> {true_title}\n\t{link_url}\n\t-> {true_url}")
             
             # Write the extracted information to the CSV file
             csv_writer.writerow([title, true_title, link_url, true_url])
@@ -83,17 +83,19 @@ csv_file.close()
 # 1. Read CSV
 df = pd.read_csv("wiki_rappers.csv")
 
-print(f"{df.duplicated().sum()} duplicates found:")
+print(f"{df.duplicated().sum()} exact duplicates found:")
 print(df[df.duplicated()])
 
 # 2(a). For complete row duplicate
 df.drop_duplicates(inplace=True)
-print(f"Removing duplicates\n{df.duplicated().sum()} duplicates remaining")
+print(f"Removing exact duplicates\n{df.duplicated().sum()} duplicates remaining")
             
 # 2(b). For partials
-title_dups = df[df.duplicated(subset=["Link Title"], keep=False)]
-url_dups = df[df.duplicated(subset=["Link URL"], keep=False)]
-print(f"Link Title duplicates:\n{title_dups}\nLink URL duplicates:\n{url_dups}")
+title_dups = df[df.duplicated(subset=["Article Title"], keep=False)]
+print(f"Article Title duplicates:\n{title_dups}")
+
+url_dups = df[df.duplicated(subset=["Article URL"], keep=False)]
+print(f"Article URL duplicates:\n{url_dups}")
 
 # 3. Save then
 df.to_csv("wiki_rappers.csv", index=False)
