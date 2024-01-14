@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import pandas as pd
+import json
 
 # URL of the Wikipedia page
 url = 'https://en.wikipedia.org/wiki/List_of_hip_hop_musicians'
@@ -16,10 +17,28 @@ soup = BeautifulSoup(response.content, 'html.parser')
 # Open the CSV file for writing
 csv_file = open('wiki_rappers.csv', 'w', newline='', encoding='utf-8')
 csv_writer = csv.writer(csv_file)
-csv_writer.writerow(["Link Title", "Link URL"])
+csv_writer.writerow(["Link Title", "Link URL", "Article Title", "Article URL"])
 
 # Find all hyperlinks in the HTML source
 list_divs = soup.find_all('div', class_='div-col')
+
+
+def get_final_url(title):
+    url = f'https://en.wikipedia.org/w/api.php?action=query&titles={title}&redirects&format=json'
+    response = requests.get(url)
+
+    if "redirects" in json.loads(response.text)["query"]:
+        final_title = json.loads(response.text)["query"]["redirects"][0]["to"]
+        snake_title = final_title.replace(" ", "_")
+    else:
+        snake_title = title
+        final_title = title.replace("_", " ")
+
+    final_url = f"https://en.wikipedia.org/wiki/{snake_title}"
+    redirect_dict = {"title": final_title, "final_url": final_url}
+
+    return redirect_dict
+
 
 count = 0
 
@@ -33,20 +52,27 @@ for div in list_divs:
             count += 1
 
             # Get the URL of the article
-            article_url = f"https://en.wikipedia.org{href}"
+            link_url = f"https://en.wikipedia.org{href}"
+
+            if count % 250 == 0 or count > 4000:
+                print(f"Writing line {count}") # - {title}: {link_url}")
+
+            snake_title = href[href.rindex("/")+1:]
+            if "#" in href:
+                snake_title = href[href.rindex("#")+1:]
+
+            redirect = get_final_url(snake_title)
 
             # Process the article URL and extract relevant information
-            # this doesn't seem to actually work; it just returns the same url, not the redirect
-            # line_response = requests.get(article_url)
-            # true_url = line_response.url
+            true_title = redirect["title"]
+            true_url = redirect["final_url"]
 
-            # if true_url != article_url:
-            #     print(f"found redirect for {title}: {article_url} -> {true_url}")
+            if true_url != link_url:
+                print(f"found redirect on line {count} for {title} -> {true_title}\n\t{link_url}\n\t-> {true_url}")
             
             # Write the extracted information to the CSV file
-            csv_writer.writerow([title, article_url])
+            csv_writer.writerow([title, true_title, link_url, true_url])
 
-            # print(f"Writing line {count}")
             
 print(f"Finished writing {count} entries")
 
