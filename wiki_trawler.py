@@ -3,6 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import json, csv
+import time
+
+start_time = time.time()
 
 list_url = "https://en.wikipedia.org/wiki/List_of_hip_hop_musicians"
 list_title = list_url[list_url.rindex("/wiki/")+6:]
@@ -91,3 +94,7 @@ deduped_file = open(f"{list_title}.csv", 'r', encoding='utf-8')
 row_count = sum(1 for row in deduped_file)
 print(f"{row_count} rows in final file")
 deduped_file.close()
+
+
+elapsed = time.strftime("%H:%M:%S", time.gmtime(time.time() - start_time))
+print(f"Total time elapsed: {elapsed}")
