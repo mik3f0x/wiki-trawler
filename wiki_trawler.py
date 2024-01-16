@@ -72,26 +72,29 @@ csv_file.close()
 # 1. Read CSV
 df = pd.read_csv(f"{list_title}.csv")
 
-print(f"{df.duplicated().sum()} exact duplicates found:")
-print(df[df.duplicated()])
-
 # 2(a). For complete row duplicate
+row_dups = df.duplicated()
+print(f"{row_dups.sum()} exact duplicates found:\n\n{df[row_dups]}\n")
+
 df.drop_duplicates(inplace=True)
-print(f"Removing exact duplicates\n{df.duplicated().sum()} duplicates remaining")
+print(f"Removing exact duplicates\n{df.duplicated().sum()} duplicates remaining\n")
             
 # 2(b). For partials
-title_dups = df[df.duplicated(subset=["Article Title"], keep=False)]
-print(f"Article Title duplicates:\n{title_dups}")
+def find_duplicates(column):
+    dups = df.duplicated(subset=[column], keep=False)
+    print(f"{dups.sum()} {column} duplicates found:\n\n{df[dups]}\n")
 
-url_dups = df[df.duplicated(subset=["Article URL"], keep=False)]
-print(f"Article URL duplicates:\n{url_dups}")
+find_duplicates("Link Title")
+find_duplicates("Link URL")
+find_duplicates("Article Title")
+find_duplicates("Article URL")
 
 # 3. Save then
 df.to_csv(f"{list_title}.csv", index=False)
 
 deduped_file = open(f"{list_title}.csv", 'r', encoding='utf-8')
 row_count = sum(1 for row in deduped_file)
-print(f"{row_count} rows in final file")
+print(f"{row_count-1} entries in final file")
 deduped_file.close()
 
 
