@@ -47,9 +47,8 @@ for div in list_divs:
             title = link.text.strip()
             link_url = f"https://en.wikipedia.org{href}"
 
-            snake_title = href[href.rindex("/")+1:]
-            if "#" in href:
-                snake_title = href[href.rindex("#")+1:]
+            delimiter = "#" if "#" in href else "/"
+            snake_title = href[href.rindex(delimiter)+1:]
 
             redirect = get_final_url(snake_title)
             true_title = redirect["title"]
