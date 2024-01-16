@@ -17,7 +17,7 @@ soup = BeautifulSoup(response.content, 'html.parser')
 # Open the CSV file for writing
 csv_file = open(f"{list_title}.csv", 'w', newline='', encoding='utf-8')
 csv_writer = csv.writer(csv_file)
-csv_writer.writerow(["Link Title", "Link URL", "Article Title", "Article URL"])
+csv_writer.writerow(["Link Title", "Article Title", "Link URL", "Article URL"])
 
 
 def get_final_url(title):
