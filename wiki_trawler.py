@@ -6,8 +6,9 @@ import json, csv
 import time
 
 start_time = time.time()
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time)))
 
-list_url = "https://en.wikipedia.org/wiki/List_of_hip_hop_musicians"
+list_url = "https://en.wikipedia.org/wiki/List_of_botanists"
 list_title = list_url[list_url.rindex("/wiki/")+6:]
 
 response = requests.get(list_url)
@@ -58,8 +59,8 @@ for div in list_divs:
 
             csv_writer.writerow([title, true_title, link_url, true_url])
 
-            # if count % 1000 == 0 or count > 4000:
-            #     print(f"Writing line {count}") # - {title}: {link_url}")
+            if count % 1000 == 0 or count > 4000:
+                print(f"Writing line {count}") # - {title}: {link_url}")
 
             # if true_url != link_url:
             #     print(f"Found redirect on line {count} for {title} -> {true_title}\n\t{link_url}\n\t-> {true_url}")
