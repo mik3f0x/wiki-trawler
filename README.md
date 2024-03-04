@@ -3,7 +3,7 @@ It’s so difficult to find and extract tabular data from Wikipedia due to the t
 Here are just a few examples of list pages in which the relevant list items are formatted in wildly different ways, and my attempt at finding a standard for parsing them:
 | Where are the list items? | Example list pages |
 | --- | --- | --- |
-| All <li> before <h2> "See Also" | [List of racehorses](https://en.wikipedia.org/wiki/List_of_racehorses) |
+| All ```<li>``` before ```<h2>``` "See Also" | [List of racehorses](https://en.wikipedia.org/wiki/List_of_racehorses) |
 | All tables: 1st column | [List of wars involving the Republic of China](https://en.wikipedia.org/wiki/List_of_wars_involving_the_Republic_of_China)<br>[List of James Bond films](https://en.wikipedia.org/wiki/List_of_James_Bond_films) |
 | All <li> before <h2> "See Also", interspersed amongst non-relevant, hyperlinked <h2> and <h3> | [List of botanical gardens in the United Kingdom](https://en.wikipedia.org/wiki/List_of_botanical_gardens_in_the_United_Kingdom) |
 | All tables: 1st column; all <li> before <h2> "See Also" | [List of islands of Scotland](https://en.wikipedia.org/wiki/List_of_islands_of_Scotland) |
