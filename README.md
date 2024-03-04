@@ -2,13 +2,11 @@
 It’s so difficult to find and extract tabular data from Wikipedia due to the total lack total lack of standardization and consistent formatting of Wikipedia’s list and category pages.
 Here are just a few examples of list pages in which the relevant list items are formatted in wildly different ways, and my attempt at finding a standard for parsing them:
 
-Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Where are the list items? | Example list pages |
+| ------------- | ------------- |
+| col 3 is      | right-aligned |
+| col 2 is      | centered      |
+| zebra stripes | are neat      |
 
 There must be at least 3 dashes separating each header cell.
 The outer pipes (|) are optional, and you don't need to make the 
