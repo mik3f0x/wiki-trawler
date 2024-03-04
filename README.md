@@ -4,13 +4,11 @@ Here are just a few examples of list pages in which the relevant list items are 
 
 | Where are the list items? | Example list pages |
 | ------------- | ------------- |
-| col 3 is      | right-aligned |
+| All ```<li>``` before ```<h2>``` "See Also" | [List of racehorses](https://en.wikipedia.org/wiki/List_of_racehorses) |
 | col 2 is      | centered      |
 | zebra stripes | are neat      |
 
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the 
-raw Markdown line up prettily. You can also use inline Markdown.
+
 
 Markdown | Less | Pretty
 --- | --- | ---
