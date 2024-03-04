@@ -11,3 +11,5 @@ Here are just a few examples of list pages in which the relevant list items are 
 | All tables: 1st column where heading = "[string that occurs in list title]" | [List of The Sopranos characters](https://en.wikipedia.org/wiki/List_of_The_Sopranos_characters) |
 | All tables: 1st column with hyperlinks;<br>1st hyperlink inside all ```<li>``` before ```<h2>``` "See Also"<br>_Most_ hyperlinked ```<h3>```, but not all! | [List of Chinese wars and battles](https://en.wikipedia.org/wiki/List_of_Chinese_wars_and_battles) |
 | Unparseable | [List of Attack on Titan characters](https://en.wikipedia.org/wiki/List_of_Attack_on_Titan_characters)<br>[List of incidents of cannibalism](https://en.wikipedia.org/wiki/List_of_incidents_of_cannibalism)<br>[List of unusual units of measurement](https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement) |
+
+The goal of this sub-project is to find an algorithm that can take any Wikipedia list article as input and extract all list items, and _only_ list items.
