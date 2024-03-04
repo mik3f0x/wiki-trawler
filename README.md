@@ -1,6 +1,7 @@
 # The Problem with Wikipedia
 It’s so difficult to find and extract tabular data from Wikipedia due to the total lack total lack of standardization and consistent formatting of Wikipedia’s list and category pages.
 Here are just a few examples of list pages in which the relevant list items are formatted in wildly different ways, and my attempt at finding a standard for parsing them:
+
 | Where are the list items? | Example list pages |
 | --- | --- | --- |
 | All ```<li>``` before ```<h2>``` "See Also" | [List of racehorses](https://en.wikipedia.org/wiki/List_of_racehorses) |
